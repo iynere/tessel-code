@@ -5,15 +5,16 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index"
+    "start": "t2 run index.js"
   },
-  "repository": "www.github.com/tessel/t2-cli",
+  "repository": "https://github.com/isar0se/tessel-code",
   "keywords": [
     "Tessel"
   ],
   "license": "MIT",
-  "readme": "A bare bones Tessel 2 blinky script.",
+  "readme": "tessel hackathon project",
   "dependencies": {
-    "accel-mma84": "^0.2.4"
+    "accel-mma84": "^0.2.4",
+    "tessel-av": "^0.15.0"
   }
 }

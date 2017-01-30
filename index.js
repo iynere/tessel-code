@@ -1,5 +1,18 @@
 var tessel = require('tessel');
 var accel = require('accel-mma84').use(tessel.port['A']);
+var path = require('path');
+var av = require('tessel-av');
+// need to move mp3
+var needToMove = path.join(__dirname, 'move.mp3');
+var needToMoveSound = new av.Speaker(needToMove);
+
+// keep moving
+var keepMoving = path.join(__dirname, 'keepmoving.mp3');
+var keepMovingSound = new av.Speaker(keepMoving);
+
+// good job you're moving mp3
+var movingShort = path.join(__dirname, 'movingshort.mp3');
+var movingShortSound = new av.Speaker(movingShort);
 
 var vals = [];
 
@@ -43,12 +56,17 @@ accel.on('ready', function () {
 			
 			// console.log(result);
 			
-			if ((result[0] < .2 && result[1] < .2) && result[2] < 1.05) {
+			if (result[0] < .3 && result[2] < 1) {
 				console.log('you need to get up');
+				needToMoveSound.play();
 			} else {
-				console.log('something"s wrong or tessel is moving');
+				if (result[1] > .3 && result[2] > 1) {
+					console.log('congrats u got the special song');
+					movingShortSound.play();
+				}
+				console.log('keep moving');
+				keepMovingSound.play();
 			}
-			
 			vals = [], result = [];
 		}, 5000);
 });
